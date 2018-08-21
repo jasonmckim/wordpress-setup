@@ -1,0 +1,6 @@
+---
+- hosts: all
+  user: root
+  tasks:
+  - name: Copy wordpress to /var/www/html/{{ sitename }}
+    shell: cp -r /opt/wordpress /var/www/html/{{ sitename }}

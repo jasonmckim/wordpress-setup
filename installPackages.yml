@@ -1,0 +1,24 @@
+---
+- hosts: all
+  user: root
+  tasks:
+  - name: install or upgrade Apache
+    yum: name=httpd state=latest
+
+  - name: install or upgrade MariaDB
+    yum: name=mariadb-server state=latest
+
+  - name: install or upgrade PHP
+    yum: name=php state=latest
+
+  - name: install or upgrade php-mysql
+    yum: name=php-mysql state=latest
+
+  - name: install or upgrade php-gd
+    yum: name=php-gd state=latest
+
+  - name: install or upgrade vim
+    yum: name=vim state=latest
+
+  - name: install or upgrade wget
+    yum: name=wget state=latest
