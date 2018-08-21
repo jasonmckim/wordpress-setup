@@ -1,0 +1,11 @@
+<VirtualHost *:80>
+	DocumentRoot /var/www/html/{{ sitename }}
+	ServerName {{ sitename }}
+	ServerAlias {{ alias }}
+	<Directory /var/www/html/{{ sitename }}>
+		Options FollowSymLinks
+		AllowOverride All
+		Require all granted
+	</Directory>
+</VirtualHost>
+
