@@ -2,6 +2,12 @@
 - hosts: webserver 
   user: root
   tasks:
+  - name: update yum cache
+    command: yum makecache
+  
+  - name: upgrade all packages
+    yum: name='*' state=latest
+  
   - name: install or upgrade Apache
     yum: name=httpd state=latest
 

@@ -1,0 +1,19 @@
+---
+- hosts: "{{ site }}"
+  user: root
+  tasks:
+  - name: Download plugin {{ plugin }}
+    get_url:
+     url: https://downloads.wordpress.org/plugin/{{ plugin }}.zip
+     dest: /var/www/html/{{ alias }}/wp-content/plugins/
+  
+  - name: Extract plugin
+    unarchive:
+     remote_src: yes 
+     src: /var/www/html/{{ alias }}/wp-content/plugins/{{ plugin }}.zip
+     dest: /var/www/html/{{ alias }}/wp-content/plugins/
+
+  - name: Delete plugin zip
+    file:
+     path: /var/www/html/{{ alias }}/wp-content/plugins/{{ plugin }}.zip
+     state: absent
