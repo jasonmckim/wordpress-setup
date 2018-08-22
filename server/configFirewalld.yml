@@ -1,0 +1,8 @@
+- hosts: webserver 
+  user: root
+  tasks:
+  - name: Open HTTP port in 
+    firewalld:
+     service: https
+     permanent: true
+     state: enabled

@@ -1,0 +1,13 @@
+---
+- hosts: webserver 
+  user: root
+  tasks:
+  - name: Restart httpd
+    service:
+     name: httpd
+     state: restarted
+
+  - name: Restart mariadb
+    service:
+     name: mariadb
+     state: restarted

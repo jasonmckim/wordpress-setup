@@ -1,3 +1,6 @@
 devserver
 prodserver
 *.retry
+init*.sh
+hosts
+group_vars

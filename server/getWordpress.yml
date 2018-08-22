@@ -1,0 +1,14 @@
+---
+- hosts: webserver
+  user: root
+  tasks:
+  - name: Download latest Wordpress
+    get_url:
+     url: https://wordpress.org/latest.tar.gz
+     dest: /opt/latest.tar.gz
+  
+  - name: Extract Wordpress tar.gz
+    unarchive:
+     remote_src: yes
+     src: /opt/latest.tar.gz
+     dest: /opt/

@@ -1,8 +1,8 @@
 <VirtualHost *:80>
-	DocumentRoot /var/www/html/{{ sitename }}
-	ServerName {{ sitename }}
+	DocumentRoot /var/www/html/{{ alias }}
+	ServerName {{ domainname }}
 	ServerAlias {{ alias }}
-	<Directory /var/www/html/{{ sitename }}>
+	<Directory /var/www/html/{{ alias }}>
 		Options FollowSymLinks
 		AllowOverride All
 		Require all granted

@@ -1,0 +1,26 @@
+---
+- hosts: "{{ site }}"
+  vars_files:
+   - ../group_vars/all
+  user: root
+  tasks:
+  - name: Create a new database with name "{{ dbname }}"
+    mysql_db:
+     name: "{{ dbname }}"
+     login_user: root
+     login_password: "{{ mysqlrootpassword }}"
+     state: present
+
+  - name: create mysql user "{{ dbusername }}"
+    mysql_user:
+     name: "{{ dbusername }}"
+     password: "{{ dbpassword }}"
+     priv: "{{ dbname }}.*:ALL"
+     login_user: root
+     login_password: "{{ mysqlrootpassword }}"
+     state: present
+
+  - name: Move wp-config-sample.php to wp-config.php
+    template:
+     src: ../templates/wp-config.php.j2
+     dest: /var/www/html/{{ alias }}/wp-config.php

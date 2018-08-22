@@ -1,0 +1,13 @@
+---
+- hosts: "{{ site }}" 
+  user: root
+  tasks:
+  - name: Enable named site at /etc/httpd/conf.d/{{ alias }}.conf
+    template:
+     src: ../templates/apachesite.j2
+     dest: /etc/httpd/conf.d/{{ alias }}.conf
+
+  - name: Restart httpd
+    service:
+     name: httpd
+     state: restarted
