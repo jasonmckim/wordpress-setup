@@ -1,0 +1,10 @@
+---
+- hosts: webserver
+  user: root
+  tasks:
+  - name: set permissive until reboot
+    command: setenforce 0 
+  
+  - name: disable selinux for real
+    selinux:
+     state: disabled
