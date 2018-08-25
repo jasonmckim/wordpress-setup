@@ -24,3 +24,5 @@
     template:
      src: ../templates/wp-config.php.j2
      dest: /var/www/html/{{ alias }}/wp-config.php
+     owner: apache
+     group: apache

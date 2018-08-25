@@ -12,6 +12,8 @@
      remote_src: yes 
      src: /var/www/html/{{ alias }}/wp-content/plugins/{{ plugin }}.zip
      dest: /var/www/html/{{ alias }}/wp-content/plugins/
+     owner: apache
+     group: apache
 
   - name: Delete plugin zip
     file:
