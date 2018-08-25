@@ -43,3 +43,10 @@
      minute: "00"
      hour: "23"
      job: "tar -zcvf /backup/{{ alias }}/{{ alias }}.tar.gz /var/www/html/{{ alias }}"
+
+  - name: Schedule S3 backups
+    cron:
+     name: "Execute S3 backup"
+     minute: "00"
+     hour: "00"
+     job: "aws s3 sync /backup/{{ alias }} s3://jasonmckim/{{ alias }}"

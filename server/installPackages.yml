@@ -28,3 +28,6 @@
   
   - name: install or upgrade mysql-python
     yum: name=MySQL-python state=latest
+
+  - name: install awscli
+    yum: name=awscli state=latest
