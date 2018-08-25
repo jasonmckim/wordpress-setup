@@ -34,5 +34,12 @@
     cron:
      name: "Schedule wordpress db backups"
      minute: "00"
-     hour: "23"
+     hour: "22"
      job: "mysqldump -u{{ dbusername }} -p{{ dbpassword }} --databases {{ dbname }} > /backup/{{ alias }}/{{ dbname }}.sql"
+
+  - name: Schedule wordpress file system backups
+    cron:
+     name: "Schedule wordpress file system backups"
+     minute: "00"
+     hour: "23"
+     job: "tar -zcvf /backup/{{ alias }}/{{ alias }}.tar.gz /var/www/html/{{ alias }}"
