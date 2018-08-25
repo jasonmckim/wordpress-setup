@@ -3,4 +3,14 @@
   user: root
   tasks:
   - name: Copy wordpress to /var/www/html/{{ alias }}
-    shell: cp -r /opt/wordpress /var/www/html/{{ alias }}
+    shell: cp -rp /opt/wordpress /var/www/html/{{ alias }}
+  
+  - name: Create .htaccess
+    shell: touch /var/www/html/{{ alias }}/.htaccess
+  
+  - name: Give proper SELinux context to .htaccess
+    shell: chcon -t httpd_sys_rw_content_t /var/www/html/{{ alias }}/.htaccess
+   
+  - name: Set proper ownership for /var/www/html/{{ alias }}
+    shell: chown -R apache:apache /var/www/html/{{ alias }} 
+  

@@ -12,3 +12,5 @@
      remote_src: yes
      src: /opt/latest.tar.gz
      dest: /opt/
+     owner: apache
+     group: apache
