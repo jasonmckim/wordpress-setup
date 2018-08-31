@@ -1,0 +1,26 @@
+---
+- hosts: "{{ site }}"
+  vars_files:
+   - ../group_vars/all
+  become: yes
+  tasks:
+  - name: Schedule db backups for {{ site }}
+    cron:
+     name: "Schedule wordpress db backups for {{ site }}"
+     minute: "00"
+     hour: "16"
+     job: "mysqldump -u{{ dbusername }} -p{{ dbpassword }} --databases {{ dbname }} > /backup/{{ alias }}/{{ dbname }}.sql"
+
+  - name: Schedule wordpress file system backups for {{ site }}
+    cron:
+     name: "Schedule wordpress file system backups for {{ site }}"
+     minute: "00"
+     hour: "17"
+     job: "tar -zcvf /backup/{{ alias }}/{{ alias }}.tar.gz /var/www/html/{{ alias }}"
+
+  - name: Schedule S3 backups for {{ site }}
+    cron:
+     name: "Execute S3 backup for {{ site }}"
+     minute: "00"
+     hour: "18"
+     job: "aws s3 sync /backup/{{ alias }} s3://jasonmckim/{{ alias }}"

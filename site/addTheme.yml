@@ -1,0 +1,21 @@
+---
+- hosts: "{{ site }}"
+  become: yes
+  tasks:
+  - name: Download theme {{ theme }}
+    get_url:
+     url: https://downloads.wordpress.org/theme/{{ theme }}.zip
+     dest: /var/www/html/{{ alias }}/wp-content/themes/
+  
+  - name: Extract theme
+    unarchive:
+     remote_src: yes 
+     src: /var/www/html/{{ alias }}/wp-content/themes/{{ theme }}.zip
+     dest: /var/www/html/{{ alias }}/wp-content/themes/
+     owner: apache
+     group: apache
+
+  - name: Delete theme zip
+    file:
+     path: /var/www/html/{{ alias }}/wp-content/themes/{{ theme }}.zip
+     state: absent

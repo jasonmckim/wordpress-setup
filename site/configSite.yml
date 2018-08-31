@@ -26,27 +26,3 @@
      dest: /var/www/html/{{ alias }}/wp-config.php
      owner: apache
      group: apache
-
-  - name: Create backup dir /backup/{{ alias }}/
-    file: path=/backup/{{ alias }}/ state=directory
-  
-  - name: Schedule db backups
-    cron:
-     name: "Schedule wordpress db backups"
-     minute: "00"
-     hour: "22"
-     job: "mysqldump -u{{ dbusername }} -p{{ dbpassword }} --databases {{ dbname }} > /backup/{{ alias }}/{{ dbname }}.sql"
-
-  - name: Schedule wordpress file system backups
-    cron:
-     name: "Schedule wordpress file system backups"
-     minute: "00"
-     hour: "23"
-     job: "tar -zcvf /backup/{{ alias }}/{{ alias }}.tar.gz /var/www/html/{{ alias }}"
-
-  - name: Schedule S3 backups
-    cron:
-     name: "Execute S3 backup"
-     minute: "00"
-     hour: "00"
-     job: "aws s3 sync /backup/{{ alias }} s3://jasonmckim/{{ alias }}"
