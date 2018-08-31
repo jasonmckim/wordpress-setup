@@ -1,6 +1,6 @@
 ---
 - hosts: webserver 
-  user: root
+  become: yes
   tasks:
   - name: update yum cache
     command: yum makecache
@@ -26,8 +26,19 @@
   - name: install or upgrade wget
     yum: name=wget state=latest
   
+  - name: install or upgrade unzip
+    yum: name=unzip state=latest
+
   - name: install or upgrade mysql-python
     yum: name=MySQL-python state=latest
 
-  - name: install awscli
-    yum: name=awscli state=latest
+  - name: Download pip
+    get_url:
+     url: https://bootstrap.pypa.io/get-pip.py
+     dest: /opt/
+
+  - name: Install pip
+    shell: python /opt/get-pip.py
+
+  - name: Install awscli
+    shell: pip install awscli --upgrade

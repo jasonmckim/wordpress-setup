@@ -1,6 +1,6 @@
 ---
 - hosts: "{{ site }}" 
-  user: root
+  become: yes
   tasks:
   - name: Enable named site at /etc/httpd/conf.d/{{ alias }}.conf
     template:

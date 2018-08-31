@@ -2,7 +2,7 @@
 - hosts: "{{ site }}"
   vars_files:
    - ../group_vars/all
-  user: root
+  become: yes
   tasks:
   - name: Create a new database with name "{{ dbname }}"
     mysql_db:

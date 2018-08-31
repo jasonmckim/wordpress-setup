@@ -2,7 +2,7 @@
 - hosts: webserver 
   vars_files:
     - ../group_vars/all
-  user: root
+  become: yes
   tasks:
   - name: Create /root/.aws config dir
     file: path=/root/.aws state=directory
