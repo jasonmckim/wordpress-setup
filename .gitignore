@@ -4,3 +4,4 @@ prodserver
 init*.sh
 hosts
 group_vars
+.idea

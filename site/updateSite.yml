@@ -1,0 +1,71 @@
+---
+- hosts: "{{ site }}" 
+  become: yes
+  tasks:
+  - name: Remove wp-admin dir from web folder
+    file:
+     state: absent
+     path: /var/www/html/{{ alias }}/wp-admin
+
+  - name: Remove wp-includes dir from web folder
+    file:
+     state: absent
+     path: /var/www/html/{{ alias }}/wp-includes
+
+  - name: Copy wordpress to /var/www/html/{{ alias }}/wp-admin
+    shell: cp -rp /opt/wordpress/wp-admin /var/www/html/{{ alias }}/wp-admin
+
+  - name: Copy wordpress to /var/www/html/{{ alias }}/wp-includes
+    shell: cp -rp /opt/wordpress/wp-includes /var/www/html/{{ alias }}/wp-includes
+
+  - name: Copy wp-load.php
+    copy:
+     src: /opt/wordpress/wp-load.php
+     dest: /var/www/html/{{ alias }}/wp-load.php
+     remote_src: yes
+     force: yes
+
+  - name: Copy wp-login.php
+    copy:
+     src: /opt/wordpress/wp-login.php
+     dest: /var/www/html/{{ alias }}/wp-login.php
+     remote_src: yes
+     force: yes
+
+  - name: Copy wp-mail.php
+    copy:
+     src: /opt/wordpress/wp-mail.php
+     dest: /var/www/html/{{ alias }}/wp-mail.php
+     remote_src: yes
+     force: yes
+
+  - name: Copy wp-signup.php
+    copy:
+     src: /opt/wordpress/wp-signup.php
+     dest: /var/www/html/{{ alias }}/wp-signup.php
+     remote_src: yes
+     force: yes
+
+  - name: Copy wp-settings.php
+    copy:
+     src: /opt/wordpress/wp-settings.php
+     dest: /var/www/html/{{ alias }}/wp-settings.php
+     remote_src: yes
+     force: yes
+
+  - name: Copy wp-trackback.php
+    copy:
+     src: /opt/wordpress/wp-trackback.php
+     dest: /var/www/html/{{ alias }}/wp-trackback.php
+     remote_src: yes
+     force: yes
+
+  - name: Copy xmlrpc.php
+    copy:
+     src: /opt/wordpress/xmlrpc.php
+     dest: /var/www/html/{{ alias }}/xmlrpc.php
+     remote_src: yes
+     force: yes
+
+  - name: Set proper ownership for /var/www/html/{{ alias }}
+    shell: chown -R apache:apache /var/www/html/{{ alias }}

@@ -6,6 +6,12 @@
     get_url:
      url: https://wordpress.org/latest.tar.gz
      dest: /opt/latest.tar.gz
+     force: yes
+
+  - name: Remove wordpress dir
+    file:
+     state: absent
+     path: /opt/wordpress
   
   - name: Extract Wordpress tar.gz
     unarchive:
